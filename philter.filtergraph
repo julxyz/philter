@@ -61,10 +61,11 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="5" x="0.4889975550122249" y="0.4764705882352941" useARA="0">
+  <FILTER uid="5" x="0.656479217603912" y="0.5666666666666667" useARA="0"
+          uiLastX_Normal="840" uiLastY_Normal="503" uiopen_Normal="1">
     <PLUGIN name="philter" format="VST3" category="Fx" manufacturer="jul.xyz"
             version="1.0.0" file="C:\Program Files\Common Files\VST3\jul.xyz\philter.vst3"
-            uniqueId="f46ce029" isInstrument="0" fileTime="185c73045a7" infoUpdateTime="185c7343eff"
+            uniqueId="f46ce029" isInstrument="0" fileTime="185cb1f1f93" infoUpdateTime="185cb21bec6"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="e9539f5c"/>
     <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
@@ -77,6 +78,25 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
+  <FILTER uid="6" x="0.6552567237163814" y="0.3568627450980392" useARA="0"
+          uiLastX_Normal="150" uiLastY_Normal="211" uiopen_Normal="1">
+    <PLUGIN name="AudioFilePlayer" format="VST3" category="Fx" manufacturer="jul.xyz"
+            version="1.0.0" file="C:\Program Files\Common Files\VST3\jul.xyz\AudioFilePlayer.vst3"
+            uniqueId="79fe81c" isInstrument="0" fileTime="185cac8be86" infoUpdateTime="185cb21bec7"
+            numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
+            uid="e95d02c7"/>
+    <STATE>300.VMjLgLR....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DCMw3BTIISX1UEaho2ZVkUdAAkKAwDUigWRWkEcQ0VTucmUY4BQP0TQLolShUELhsVRxHlXuY0XxcWQQUWSVM1bUwVX50zQWETRFE1ZQISXzcWUQMSPxDFdQIiXhkkUik1bF4jclkmXzI1UXESPt3hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
   <CONNECTION srcFilter="5" srcChannel="0" dstFilter="3" dstChannel="0"/>
   <CONNECTION srcFilter="5" srcChannel="1" dstFilter="3" dstChannel="1"/>
+  <CONNECTION srcFilter="6" srcChannel="0" dstFilter="5" dstChannel="0"/>
+  <CONNECTION srcFilter="6" srcChannel="1" dstFilter="5" dstChannel="1"/>
 </FILTERGRAPH>
