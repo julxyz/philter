@@ -1,4 +1,4 @@
-Filter plugin that copies the rotating/morphing filter from UAD's Opal Synthesizer
+Filter plugin that emulates the rotating/morphing filter from UAD's Opal Synthesizer
 
 ### Comes with everything you'd wish for ( soon™  ×﹏× )
 - Filter rotating through lowpass, bandpass, highpass and notch filter types
