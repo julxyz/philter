@@ -10,6 +10,24 @@
 
 #include <JuceHeader.h>
 
+namespace Params {
+
+    enum Names {
+        Filter_Cutoff,
+        Filter_Resonance,
+        Enable_Autogain,
+    };
+
+    inline const std::map<Names, juce::String>& GetParams() {
+        static std::map<Names, juce::String> params = {
+            {Filter_Cutoff, "Cutoff"},
+            {Filter_Resonance, "Resonance"},
+            {Enable_Autogain, "Autogain"},
+        };
+        return params;
+    };
+}
+
 //==============================================================================
 /**
 */
@@ -64,9 +82,11 @@ public:
 
 private:
     double lastSampleRate;
-    juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> lpFilter;
-    juce::AudioParameterFloat* cutoff{ nullptr };
-    juce::AudioParameterFloat* resonance { nullptr };
+    double autogain_previous;
+    juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> lowpass_filter;
+    juce::AudioParameterFloat* filter_cutoff{ nullptr };
+    juce::AudioParameterFloat* filter_resonance { nullptr };
+    juce::AudioParameterBool* enable_autogain{ nullptr };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PhilterAudioProcessor)

@@ -65,10 +65,10 @@
           uiLastX_Normal="840" uiLastY_Normal="503" uiopen_Normal="1">
     <PLUGIN name="philter" format="VST3" category="Fx" manufacturer="jul.xyz"
             version="1.0.0" file="C:\Program Files\Common Files\VST3\jul.xyz\philter.vst3"
-            uniqueId="f46ce029" isInstrument="0" fileTime="185cb1f1f93" infoUpdateTime="185cb21bec6"
+            uniqueId="f46ce029" isInstrument="0" fileTime="185cbe8407f" infoUpdateTime="185cbe87cd7"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="e9539f5c"/>
-    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>319.VMjLgXS....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DSM03BTEwlXmAiUYoWUrIVdA4hKAgjKTETRUAUSAAkKBolQY4BQtHTQLQ0X5gCaYwVPlM1Y2Y0XqEDTtjDTt3hKt3hKt3hbl4RPtPUPIUETMEDTtHjZFkkKDYmPEgTUYkGNrE1YzDCVqEjYic1cVM1ZAAkKIAkKt3hKt3hKt3RRtDjKt3hKt3hKt3hKt3FUUMTUDQEdqw1XmE0UYQTQFM1YAAkKAgDUjYWQwHVdAAkKAwjKtLlKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -82,10 +82,10 @@
           uiLastX_Normal="150" uiLastY_Normal="211" uiopen_Normal="1">
     <PLUGIN name="AudioFilePlayer" format="VST3" category="Fx" manufacturer="jul.xyz"
             version="1.0.0" file="C:\Program Files\Common Files\VST3\jul.xyz\AudioFilePlayer.vst3"
-            uniqueId="79fe81c" isInstrument="0" fileTime="185cac8be86" infoUpdateTime="185cb21bec7"
+            uniqueId="79fe81c" isInstrument="0" fileTime="185cac8be86" infoUpdateTime="185cbe87cd8"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="e95d02c7"/>
-    <STATE>300.VMjLgLR....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DCMw3BTIISX1UEaho2ZVkUdAAkKAwDUigWRWkEcQ0VTucmUY4BQP0TQLolShUELhsVRxHlXuY0XxcWQQUWSVM1bUwVX50zQWETRFE1ZQISXzcWUQMSPxDFdQIiXhkkUik1bF4jclkmXzI1UXESPt3hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
+    <STATE>323.VMjLgnS....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DSM33BTIISX1UEaho2ZVkUdAAkKAwDUigWRWkEcQ0VTucmUY4BQlEUQXolShACUik2ZwfkXUQEV3E0QZsVQFM1ZIczUTkzUZQ2ZFMFM2UTU3sFag8VTWQ1btLESy4xPLgmdRE0YIczXtUkUXoWUrI1blQkVsclQHQ0ZFk0ZzfVVxUTLX4hKt3hKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDTtDDRTQlcEEiX4EDTtDDSt3xXt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQ77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>

@@ -19,13 +19,24 @@ PhilterAudioProcessor::PhilterAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ), lpFilter(juce::dsp::IIR::Coefficients<float>::makeLowPass(44100, 1000.0f, 1.0f))
+                       ), lowpass_filter(juce::dsp::IIR::Coefficients<float>::makeLowPass(44100, 1000.0f, 1.0f))
 #endif
 {
-    cutoff = dynamic_cast<juce::AudioParameterFloat*> (apvts.getParameter("Cutoff"));
-    jassert(cutoff != nullptr);
-    resonance = dynamic_cast<juce::AudioParameterFloat*> (apvts.getParameter("Resonance"));
-    jassert(resonance != nullptr);
+    using namespace Params;
+    const auto& params = GetParams();
+
+    auto castBool = [&apvts = this->apvts, &params](auto &param, const auto &paramName) {
+        param = dynamic_cast<juce::AudioParameterBool*> (apvts.getParameter(params.at(paramName)));
+        jassert(param != nullptr);
+    };
+
+    auto castFloat = [&apvts = this->apvts, &params](auto& param, const auto& paramName) {
+        param = dynamic_cast<juce::AudioParameterFloat*> (apvts.getParameter(params.at(paramName)));
+        jassert(param != nullptr);
+    };
+    castFloat(filter_cutoff, Names::Filter_Cutoff);
+    castFloat(filter_resonance, Names::Filter_Resonance);
+    castBool(enable_autogain, Names::Enable_Autogain);
 }
 
 PhilterAudioProcessor::~PhilterAudioProcessor()
@@ -37,6 +48,7 @@ const juce::String PhilterAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
+
 
 bool PhilterAudioProcessor::acceptsMidi() const
 {
@@ -98,13 +110,14 @@ void PhilterAudioProcessor::changeProgramName (int index, const juce::String& ne
 void PhilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock) {
 
     lastSampleRate = sampleRate;
+    autogain_previous = 0.0;
 
     juce::dsp::ProcessSpec spec;
     spec.sampleRate = sampleRate;
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = getTotalNumOutputChannels();
-    lpFilter.prepare(spec);
-    lpFilter.reset();
+    lowpass_filter.prepare(spec);
+    lowpass_filter.reset();
 
 }
 
@@ -141,7 +154,7 @@ bool PhilterAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 #endif
 
 void PhilterAudioProcessor::updateFilter() {
-    *lpFilter.state = *juce::dsp::IIR::Coefficients<float>::makeLowPass(lastSampleRate, cutoff->get(), 0.1f*resonance->get());
+    *lowpass_filter.state = *juce::dsp::IIR::Coefficients<float>::makeLowPass(lastSampleRate, filter_cutoff->get(), 0.1f*filter_resonance->get());
 }
 
 void PhilterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages) {
@@ -149,15 +162,37 @@ void PhilterAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
     auto totalNumInputChannels = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
+    // clear dead channels
+    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
         buffer.clear(i, 0, buffer.getNumSamples());
+    }
 
-    
+    // autogain
+    double inputGain = 0.0;
+    for (int i = 0; i < buffer.getNumChannels(); ++i) {
+        inputGain += buffer.getRMSLevel(i, 0, buffer.getNumSamples());
+    }
 
     auto block = juce::dsp::AudioBlock<float>(buffer);
     auto context = juce::dsp::ProcessContextReplacing<float>(block);
     updateFilter();
-    lpFilter.process(context);
+    lowpass_filter.process(context);
+
+
+
+    // autogain
+    if (enable_autogain->get()) {
+        double outputGain = 0.0;
+        for (int i = 0; i < buffer.getNumChannels(); ++i)
+            outputGain += buffer.getRMSLevel(i, 0, buffer.getNumSamples());
+
+        auto makeup = (inputGain > 0.0) ? outputGain / inputGain : 1.0;
+        for (int i = 0; i < buffer.getNumChannels(); ++i)
+            buffer.applyGainRamp(i, 0, buffer.getNumSamples(), autogain_previous, makeup);
+
+        DBG(enable_autogain->getCurrentValueAsText() << ": " << makeup);
+        autogain_previous = makeup;
+    }
 }
 
 //==============================================================================
@@ -192,18 +227,22 @@ juce::AudioProcessorValueTreeState::ParameterLayout PhilterAudioProcessor::creat
 
     APVTS::ParameterLayout layout;
     using namespace juce; 
+    using namespace Params;
+    const auto& params = GetParams();
 
-    layout.add(std::make_unique<AudioParameterFloat>("Cutoff",
-                                                     "Cutoff",
+    layout.add(std::make_unique<AudioParameterFloat>(params.at(Names::Filter_Cutoff),
+                                                     params.at(Names::Filter_Cutoff),
                                                      NormalisableRange<float>(10, 20000, 1, 0.25f),
                                                      600));
-    layout.add(std::make_unique<AudioParameterFloat>("Resonance",
-                                                     "Resonance",
-                                                     NormalisableRange<float>(0.1f, 100, 1, 1),
-                                                     0.1f));
+    layout.add(std::make_unique<AudioParameterFloat>(params.at(Names::Filter_Resonance),
+                                                     params.at(Names::Filter_Resonance),
+                                                     NormalisableRange<float>(1.0f, 100, 1, 1),
+                                                     10));
+    layout.add(std::make_unique<AudioParameterBool>(params.at(Names::Enable_Autogain), params.at(Names::Enable_Autogain), true));
 
     return layout;
 }
+
 
 //==============================================================================
 // This creates new instances of the plugin..
