@@ -1,11 +1,11 @@
-Filter plugin that emulates the rotating/morphing filter from UAD's Opal Synthesizer
+Filter plugin that emulates the rotating/morphing filter from UAD's Opal synthesizer
 
 ### Comes with everything you'd wish for ( soon™  ×﹏× )
 - Filter rotating through lowpass, bandpass, highpass and notch filter types
 - Resonance controls
 - Position modulation via LFO, envelope or your DAW
 - Autogain
-- Wet/Dry Mix
+- Wet/dry mix
 - Unlimited fully featured free trial (it's free how cool is that) ♡⸜(˶˃ ᵕ ˂˶)⸝♡
 
 #
