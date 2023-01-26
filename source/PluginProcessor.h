@@ -16,6 +16,9 @@ namespace Params {
         Filter_Cutoff,
         Filter_Resonance,
         Enable_Autogain,
+        Bypass,
+        DryWet,
+        Position,
     };
 
     inline const std::map<Names, juce::String>& GetParams() {
@@ -23,10 +26,15 @@ namespace Params {
             {Filter_Cutoff, "Cutoff"},
             {Filter_Resonance, "Resonance"},
             {Enable_Autogain, "Autogain"},
+            {Bypass, "Bypass"},
+            {DryWet, "DryWet"},
+            {Position, "Position"},
         };
         return params;
     };
 }
+
+typedef std::vector<float> PositionCoefficients;
 
 //==============================================================================
 /**
@@ -73,7 +81,8 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-    void updateFilter();
+    void updateFilters();
+    PositionCoefficients getPositionCoefficients();
 
     using APVTS = juce::AudioProcessorValueTreeState;
     static APVTS::ParameterLayout createParameterLayout();
@@ -84,9 +93,14 @@ private:
     double lastSampleRate;
     double autogain_previous;
     juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> lowpass_filter;
-    juce::AudioParameterFloat* filter_cutoff{ nullptr };
+    juce::dsp::DryWetMixer<float> lowpass_filter_mixer;
+    juce::dsp::DryWetMixer<float> dry_wet_mixer;
+    juce::AudioParameterFloat* filter_cutoff { nullptr };
     juce::AudioParameterFloat* filter_resonance { nullptr };
-    juce::AudioParameterBool* enable_autogain{ nullptr };
+    juce::AudioParameterFloat* drywet { nullptr };
+    juce::AudioParameterFloat* position { nullptr };
+    juce::AudioParameterBool* enable_autogain { nullptr };
+    juce::AudioParameterBool* bypass { nullptr };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PhilterAudioProcessor)
