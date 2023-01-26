@@ -3,7 +3,7 @@
 <JUCERPROJECT id="g8ntfT" name="philter" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="jul.xyz"
               companyWebsite="jul.xyz" companyEmail="jul@jul.xyz" bundleIdentifier="xyz.jul.philter"
-              aaxIdentifier="xyz.jul.philter">
+              aaxIdentifier="xyz.jul.philter" cppLanguageStandard="20">
   <MAINGROUP id="SrpwLG" name="philter">
     <GROUP id="{8D43DC74-AFD5-73CD-11DB-802A4313B024}" name="Source">
       <FILE id="Z0kgUE" name="PluginProcessor.cpp" compile="1" resource="0"
